@@ -2,14 +2,17 @@ import React from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   Image,
   FlatList,
+  SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 
 const ChatList = () => {
+  const navigation = useNavigation();
+
   const list = [
     {
       id: 1,
@@ -41,9 +44,17 @@ const ChatList = () => {
       },
     },
   ];
+
+  const onNavigateToChatRoom = () => {
+    navigation.navigate('ChatRoom');
+  };
+
   const _renderItem = ({item, index}) => {
     return (
-      <TouchableOpacity key={index.toString()} style={styles.chat.container}>
+      <TouchableOpacity
+        key={index.toString()}
+        style={styles.chat.container}
+        onPress={onNavigateToChatRoom}>
         <View style={styles.chat.image.container}>
           <Image
             style={styles.chat.image.imageStyle}
@@ -66,6 +77,7 @@ const ChatList = () => {
       </TouchableOpacity>
     );
   };
+
   return (
     <SafeAreaView>
       <FlatList
